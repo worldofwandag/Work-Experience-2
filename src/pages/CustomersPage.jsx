@@ -44,6 +44,21 @@ export default function CustomersPage() {
     load()
   }, [api])
 
+  // Called by the plan editor after a successful PATCH with the updated customer.
+  //
+  // Why this exists: `rows` is only filled by load(). Saving an edit used to just
+  // close the dialog, so nothing updated `rows` and the table kept the old plan
+  // and seats until something else happened to re-run load() (which, before the
+  // `api` identity fix in DashboardLayout, happened by accident whenever the
+  // layout re-rendered, and that is why it looked random to support).
+  //
+  // We swap the one changed row into state instead of calling load() again:
+  // load() sets `loading` to true, which would bring back the skeleton flash,
+  // and it would add a second GET /api/customers for data we already have.
+  function handleSaved(updated) {
+    setRows((current) => current.map((row) => (row.id === updated.id ? updated : row)))
+  }
+
   const visible = rows
     .filter((row) => status === 'all' || row.status === status)
     .sort(SORTERS[sortKey])
@@ -117,7 +132,14 @@ export default function CustomersPage() {
         )}
       </div>
 
-      {editing && <PlanEditorDialog customer={editing} api={api} onClose={() => setEditing(null)} />}
+      {editing && (
+        <PlanEditorDialog
+          customer={editing}
+          api={api}
+          onSaved={handleSaved}
+          onClose={() => setEditing(null)}
+        />
+      )}
     </div>
   )
 }

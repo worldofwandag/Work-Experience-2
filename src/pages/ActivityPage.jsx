@@ -19,6 +19,7 @@ export default function ActivityPage() {
   const [density, setDensity] = useState('comfortable')
 
   useEffect(() => {
+    console.log('Overview effect running')
     let cancelled = false
     setLoading(true)
     api.get('/api/activity').then((data) => {

@@ -20,6 +20,7 @@ export default function OverviewPage() {
   const [activity, setActivity] = useState(null)
 
   useEffect(() => {
+    console.log('Overview effect running')
     let cancelled = false
     setCustomers(null)
     setActivity(null)
