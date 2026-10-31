@@ -8,11 +8,13 @@ scanned   35 source files (src/**/*.js, src/**/*.jsx), 1 entry (index.html)
 generated 2026-10-14T16:42:07Z
 ```
 
+
+
 ## Source files
 
 | File | Lines | Result |
 | --- | ---: | --- |
-| `src/components/Modal.jsx` | 159 | no importers found |
+| `src/components/Modal.jsx` | 159 | no importers found |  DEAD - DELETED
 | `src/components/SettingsPanel.jsx` | 153 | no importers found |
 | `src/components/StatTile.jsx` | 102 | no importers found |
 | `src/components/charts/TrendChart.jsx` | 142 | no importers found |
