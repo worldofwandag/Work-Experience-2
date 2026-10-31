@@ -8,7 +8,7 @@ const SEAT_LIMITS = {
   Enterprise: 500,
 }
 
-export default function PlanEditorDialog({ customer, api, onClose }) {
+export default function PlanEditorDialog({ customer, api, onClose, onSaved }) {
   const [plan, setPlan] = useState(customer.plan)
   const [seats, setSeats] = useState(customer.seats)
   const [saving, setSaving] = useState(false)
@@ -24,7 +24,12 @@ export default function PlanEditorDialog({ customer, api, onClose }) {
     setSaving(true)
     setError(null)
     try {
-      await api.patch(`/api/customers/${customer.id}`, { plan, seats: seatsNumber })
+      // The PATCH response is the updated customer. Hand it back to the page via
+      // onSaved so the list can show it straight away. Before, this result was
+      // thrown away and we only called onClose(), so the page never found out
+      // that a customer had changed and kept showing the old plan and seats.
+      const updated = await api.patch(`/api/customers/${customer.id}`, { plan, seats: seatsNumber })
+      onSaved(updated)
       onClose()
     } catch (err) {
       setError(err.message)
