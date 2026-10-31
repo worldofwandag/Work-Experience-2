@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
-import moment from 'moment'
 import PageHeader from '../components/PageHeader'
 import { TableSkeleton } from '../components/Skeleton'
 import ActivityFeed from './activity/ActivityFeed'

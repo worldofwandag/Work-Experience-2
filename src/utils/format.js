@@ -1,5 +1,3 @@
-import moment from 'moment-timezone'
-
 const LOCALE = 'en-GB'
 
 export function formatMoney(amount, currency = 'USD') {

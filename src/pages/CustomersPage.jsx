@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
-import _ from 'lodash'
 import Badge from '../components/Badge'
 import PageHeader from '../components/PageHeader'
 import EmptyState from '../components/EmptyState'
